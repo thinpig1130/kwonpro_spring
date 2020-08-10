@@ -1,0 +1,32 @@
+package com.kwonpro.www.dao;
+
+import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
+
+import org.apache.ibatis.session.SqlSession;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+
+import com.kwonpro.www.dto.Notice;
+
+@RunWith (SpringRunner.class)
+@MybatisTest
+@Configuration("servlet-context.xml")
+public class TestNoticeDao {
+	
+	@Autowired
+	private SqlSession sqlSession;
+	
+	@Test 
+	public void TestNoticeCnt() {
+		NDao dao = sqlSession.getMapper(NDao.class);
+		ArrayList<Notice> nlist = dao.list(1);
+		
+		assertTrue(nlist.size() <= 10);
+	}
+
+}

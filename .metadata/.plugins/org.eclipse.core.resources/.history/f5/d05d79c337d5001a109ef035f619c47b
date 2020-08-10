@@ -1,0 +1,23 @@
+package com.kwonpro.www.dao;
+
+import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
+
+import org.apache.ibatis.session.SqlSession;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.kwonpro.www.dto.Notice;
+
+public class TestNoticeDao {
+	
+	@Test 
+	public void TestNoticeCnt() {
+		NDao dao = sqlSession.getMapper(NDao.class);
+		ArrayList<Notice> nlist = dao.list(1);
+		
+		assertTrue(nlist.size() <= 10);
+	}
+
+}

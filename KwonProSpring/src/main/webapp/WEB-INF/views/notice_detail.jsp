@@ -1,0 +1,245 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>세종시 프로그래머 온라인 허브</title>
+    <meta charset="UTF-8">
+    
+    <link href="/resources/css/customer/layout.css" type="text/css" rel="stylesheet" />
+    <style>
+        #visual .content-container{	
+            height:inherit;
+            display:flex; 
+            align-items: center;
+            background: url("/resources/images/customer/visual.png") no-repeat center;
+        }
+    </style>
+</head>
+<body>
+	<!-- header 부분 -->
+	<header id="header">
+		<div class="content-container">
+			<!-- --------------------------- <header> ----------------------------------------->
+			<h1 id="logo">
+				<a href="/"> <img src="/resources/images/logo.png"
+					alt="KwonPro 온라인" />
+				</a>
+			</h1>
+
+			<section>
+				<h1 class="hidden">헤더</h1>
+				<nav id="main-menu">
+					<h1>메인메뉴</h1>
+					<ul>
+						<li><a href="">모임가이드</a></li>
+						<li><a href="">모임선택</a></li>
+						<li><a href="">AnswerIs</a></li>
+					</ul>
+				</nav>
+
+				<div class="sub-menu">
+					<section id="search-form">
+						<h1>강좌검색 폼</h1>
+						<form action="">
+							<fieldset>
+								<legend>모임검색필드</legend>
+								<label>모임검색</label> <input type="text" name="q" value="" /> <input
+									type="submit" value="검색" />
+							</fieldset>
+						</form>
+					</section>
+					<c:choose>
+						<c:when test="${uid == null}">
+							<nav id="acount-menu">
+								<h1 class="hidden">회원메뉴</h1>
+								<ul>
+									<li><a href="/member/login">로그인</a></li>
+									<li><a href="/member/agree">회원가입</a></li>
+								</ul>
+							</nav>
+							<nav id="member-menu" class="linear-layout">
+								<h1 class="hidden">고객메뉴</h1>
+								<ul class="linear-layout">
+									<li><a href="/notice"><img
+											src="/resources/images/txt-customer.png" alt="고객센터" /></a></li>
+								</ul>
+							</nav>
+						</c:when>
+						<c:otherwise>
+							<nav id="acount-menu">
+								<h1 class="hidden">회원메뉴</h1>
+								<ul>
+									<li>${uid}님 접속중</li>
+									<li> <a href="/member/logout"> 로그아웃 </a> </li>
+								</ul>
+							</nav>
+							<nav id="member-menu" class="linear-layout">
+								<h1 class="hidden">고객메뉴</h1>
+								<ul class="linear-layout">
+									<li><a href="/"><img
+											src="/resources/images/txt-mypage.png" alt="마이페이지" /></a></li>
+									<li><a href="/notice"><img
+											src="/resources/images/txt-customer.png" alt="고객센터" /></a></li>
+								</ul>
+							</nav>
+						</c:otherwise>
+					</c:choose>
+
+				</div>
+			</section>
+
+		</div>
+
+	</header>
+
+	<!-- --------------------------- <visual> --------------------------------------- -->
+	<!-- visual 부분 -->
+	
+	<div id="visual">
+		<div class="content-container"></div>
+	</div>
+	<!-- --------------------------- <body> --------------------------------------- -->
+	<div id="body">
+		<div class="content-container clearfix">
+
+			<!-- --------------------------- aside --------------------------------------- -->
+			<!-- aside 부분 -->
+
+
+			<aside class="aside">
+				<h1>Online 연구소</h1>
+
+				<nav class="menu text-menu first margin-top">
+					<h1>메뉴</h1>
+					<ul>
+						<li><a class="current"  href="/notice">공지사항</a></li>
+						<li><a class=""  href="">자주하는 질문</a></li>
+						<li><a class="" href="">모임문의</a></li>
+						<li><a class="" href="">이벤트/번개</a></li>
+					</ul>
+				</nav>
+
+
+	<nav class="menu">
+		<h1>협력기관</h1>
+		<ul>
+			<li><a target="_blank" href="http://www.tjvision.co.kr"><img src="/resources/images/tjvision.png" alt="비젼직업전문학교" /></a></li>
+            <li><a target="_blank" href="https://www.sejongcommunity.com"><img src="/resources/images/sejongcommunity.png" alt="세종시 마을공동체지원센터" /></a></li>                
+            			
+		</ul>
+	</nav>
+					
+			</aside>
+	<!-- --------------------------- main --------------------------------------- -->
+
+			<main>
+				<h2 class="main title">공지사항</h2>
+				
+				<div class="breadcrumb">
+					<h3 class="hidden">breadlet</h3>
+					<ul>
+						<li>home</li>
+						<li>고객센터</li>
+						<li>공지사항</li>
+					</ul>
+				</div>
+
+				<div class="margin-top first">
+						<h3 class="hidden">공지사항 내용</h3>
+						<table class="table">
+							<tbody>
+								<tr>
+									<th>제목</th>
+									<td class="text-align-left text-indent text-strong text-orange" colspan="3">${notice.title}</td>
+								</tr>
+								<tr>
+									<th>작성일</th>
+									<td class="text-align-left text-indent" colspan="3">${notice.regdate}</td>
+								</tr>
+								<tr>
+									<th>작성자</th>
+									<td>${notice.writerId}</td>
+									<th>조회수</th>
+									<td>${notice.hit}</td>
+								</tr>
+								<tr>
+									<th>첨부파일</th>
+									<td colspan="3">${notice.files}</td>
+								</tr>
+								<tr class="content">
+									<td colspan="4">
+										${notice.content}
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					
+					<div class="margin-top text-align-center">
+						<a class="btn btn-list" href="/notice">목록</a>
+						<c:if test ="${notice.writerId == uid}">
+							<a class="btn-text btn-default" href="/notice/edit?id=${notice.id}">수정</a>
+                    		<a class="btn-text btn-default" href="/notice/delete?id=${notice.id}">삭제</a>
+						</c:if>
+					</div>
+					
+					<div class="margin-top">
+						<table class="table border-top-default">
+							<tbody>
+								<tr>
+									<th>다음글</th>
+									<td colspan="3"  class="text-align-left text-indent">
+									<a class="text-blue text-strong" href="/notice/detail?id=${nextNotice.id}">${nextNotice.title}</a></td>
+								</tr>					
+								<tr>
+									<th>이전글</th>
+									<td colspan="3"  class="text-align-left text-indent"><a class="text-blue text-strong" href="/notice/detail?id=${preNotice.id}">${preNotice.title}</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>			
+			</main>		
+			
+		</div>
+	</div>
+
+    <!-- ------------------- <footer> --------------------------------------- -->
+
+
+
+        <footer id="footer">
+        <div class="content-container">
+            <h2 id="footer-logo"><img src="/resources/images/logo-footer.png" alt="모임정보"></h2>
+
+            <div id="company-info">
+                <dl>
+                    <dt>주소:</dt>
+                    <dd>세종특별자치시 도움3로 160</dd>
+                    <dt>관리자메일:</dt>
+                    <dd>thinpig1130@gmail.com</dd>
+                </dl>
+                <dl>
+                    <dt>사업자 등록번호:</dt>
+                    <dd>111-11-11111</dd>
+                    <dt>비영리 단체:</dt>
+                    <dd>세종시마을공동체 143호</dd>
+                </dl>
+                <dl>
+                    <dt>공동체명:</dt>
+                    <dd>세종시프로그래머모임</dd>
+                    <dt>대표:</dt>
+                    <dd>권다애</dd>
+                    <dt>전화번호:</dt>
+                    <dd>010-4191-####</dd>
+                </dl>
+                <div id="copyright" class="margin-top">Copyright ⓒ kwonpro.lec 2020-2020 All Right Reserved.
+                    Contact thinpig1130@gmail.com for more information</div>
+            </div>
+        </div>
+    </footer>
+    </body>
+    
+    </html>
